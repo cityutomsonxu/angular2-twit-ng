@@ -1,0 +1,29 @@
+<div class="ui comments" *ngIf="tweets.length"> 
+  <div class="comment" *ngFor="let tweet of tweets">
+    <a class="avatar">
+      <img src="/assets/avatars/{{tweet.avatar}}">
+    </a>
+    <div class="content">
+      <a class="author">{{tweet.author}}</a>
+      <div class="metadata">
+        <span class="date">{{tweet.date | date: 'hh:mm:ss dd/mm/yy'}}</span>
+      </div>
+      <div class="text">
+        {{tweet.body}}
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+        <a class="like" (click)="onFavorite(tweet)">
+          <i class="like icon" [ngClass]="{liked: isUserInCollection(tweet.favorites,'Glen')}"></i> {{tweet.favorites.length}} Favourites
+        </a>
+        <a class="retweet" (click)="onRetweet(tweet)">
+          <i class="retweet icon" [ngClass]="{retweeted: isUserInCollection(tweet.retweets,'Glen')}"></i> {{tweet.retweets.length}} Retweets
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!tweets.length">
+  <h2>There are not any tweets here.</h2>
+</div>
