@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { FeedComponent } from './feed.component';
+import { MessagesComponent } from './messages.component';
 
-describe('Component: Feed', () => {
+describe('Component: Messages', () => {
   it('should create an instance', () => {
-    let component = new FeedComponent(null);
+    let component = new MessagesComponent();
     expect(component).toBeTruthy();
   });
 });
