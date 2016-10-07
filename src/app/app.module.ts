@@ -12,6 +12,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { FriendsComponent } from './friends/friends.component';
 import {routing} from './app.routing';
 import { FriendComponent } from './friend/friend.component';
+import {InMemoryWebApiModule} from 'angular2-in-memory-web-api';
+import { MockDatabaseService }  from './mock.database.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { FriendComponent } from './friend/friend.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    InMemoryWebApiModule.forRoot(MockDatabaseService, { 
+      delay: 1000,  rootPath: 'api/'
+    })
   ],
   providers: [UserService, FeedService],
   bootstrap: [AppComponent]

@@ -45,6 +45,6 @@ export class FeedService {
   }
 
   getFriends(): Observable<string[]> {
-    return this.http.get("/assets/friends.json").map(resp => resp.json() as string[]);
+    return this.http.get("/yoyo/friends").map(resp => resp.json().data as string[]);
   }
 }
