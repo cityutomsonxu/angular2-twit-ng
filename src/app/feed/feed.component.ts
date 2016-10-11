@@ -15,7 +15,10 @@ export class FeedComponent implements OnInit {
   constructor(private userService: UserService, private feedService: FeedService) { }
 
   ngOnInit() {
-    this.tweets = this.feedService.getCurrentFeed();
+    this.feedService.getCurrentFeed().subscribe(tweets => {
+      console.log(tweets);
+      this.tweets = tweets;
+    });
   }
 
 
@@ -29,7 +32,10 @@ export class FeedComponent implements OnInit {
 
   onNewTweet() {
     console.log(this.tweetText);
-    this.feedService.postNewTweet(this.tweetText);
+    this.feedService.postNewTweet(this.tweetText).subscribe((newTweet) => {
+        console.log(newTweet);
+        this.tweets.unshift(newTweet);
+      });
     this.tweetText = "";
   }
 
