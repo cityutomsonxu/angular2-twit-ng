@@ -18,7 +18,12 @@ export class FeedService {
         fetchedTweets.push(this.getTweetFromJson(tweet));
       }
       return fetchedTweets as Array<Tweet>;
-    });
+    }).catch(this.handleError);
+  }
+
+  private handleError(err) {
+    console.log(err);
+    return Observable.throw(err);
   }
 
   private getTweetFromJson(obj: Tweet): Tweet {
@@ -50,11 +55,13 @@ export class FeedService {
     let url = `/api/tweets/${tweet.id}`;
 
     return this.http.put(url, body).map(resp => {
-        console.log(resp);
-        if (resp.status == 204) {
-          console.log("Update tweet successfully. Yay!");
-        }
-      });
+      console.log(resp);
+      if (resp.status == 204) {
+        console.log("Update tweet successfully. Yay!");
+      } else {
+        throw `Error fetching tweet ${tweet.id}. Received status code: ${resp.status}`;
+      }
+    }).catch(this.handleError);
   }
 
   postNewTweet(tweetText: string): Observable<Tweet> {
@@ -66,10 +73,10 @@ export class FeedService {
     return this.http.post('/api/tweets', body).map(resp => {
       console.log(resp.json());
       return this.getTweetFromJson(resp.json().data);
-    });
+    }).catch(this.handleError);
   }
 
   getFriends(): Observable<string[]> {
-    return this.http.get("/api/friends").map(resp => resp.json().data as string[]);
+    return this.http.get("/api/friends").map(resp => resp.json().data as string[]).catch(this.handleError);
   }
 }

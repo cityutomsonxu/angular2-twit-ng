@@ -10,6 +10,8 @@ import { FeedService } from '../feed.service';
 export class FeedComponent implements OnInit {
   tweets = [];
   tweetText = "";
+  errorText = "";
+
 
 
   constructor(private userService: UserService, private feedService: FeedService) { }
@@ -18,6 +20,8 @@ export class FeedComponent implements OnInit {
     this.feedService.getCurrentFeed().subscribe(tweets => {
       console.log(tweets);
       this.tweets = tweets;
+    }, (err) => {
+      this.errorText = `Oh No! We have experienced an internal error. (the underlying error was ${err}) `;
     });
   }
 
@@ -33,9 +37,11 @@ export class FeedComponent implements OnInit {
   onNewTweet() {
     console.log(this.tweetText);
     this.feedService.postNewTweet(this.tweetText).subscribe((newTweet) => {
-        console.log(newTweet);
-        this.tweets.unshift(newTweet);
-      });
+      console.log(newTweet);
+      this.tweets.unshift(newTweet);
+    }, (err) => {
+      this.errorText = `Oh No! We have experienced an internal error. (the underlying error was ${err}) `;
+    });
     this.tweetText = "";
   }
 
