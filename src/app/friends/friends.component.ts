@@ -8,6 +8,7 @@ import { FeedService } from '../feed.service';
 })
 export class FriendsComponent implements OnInit {
   friends = [];
+  loaded=false;
 
   constructor(private feedService: FeedService) { }
 
@@ -15,6 +16,10 @@ export class FriendsComponent implements OnInit {
     this.feedService.getFriends().subscribe(friends => {
       this.friends = friends;
       console.log(friends);
+    },(err) => {
+      console.log(err);
+    }, () => {
+      this.loaded=true;
     });
   }
 

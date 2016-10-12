@@ -1,18 +1,24 @@
-<div class="ui comments" *ngIf='friends.length'>
-  <div class="comment" *ngFor='let friend of friends'>
-    <a class="avatar">
-      <img src="/assets/avatars/{{friend.toLowerCase()}}.jpg">
-    </a>
-    <div class="content">
-      <a class="author">{{friend}}</a>
+<div *ngIf='loaded'>
+  <div class="ui comments" *ngIf='friends.length'>
+    <div class="comment" *ngFor='let friend of friends'>
+      <a class="avatar">
+        <img src="/assets/avatars/{{friend.toLowerCase()}}.jpg">
+      </a>
+      <div class="content">
+        <a class="author">{{friend}}</a>
 
-      <div class="actions">
-        <a routerLink="/friends/{{friend}}">Details</a>
+        <div class="actions">
+          <a routerLink="/friends/{{friend}}">Details</a>
+        </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf='!friends.length'>
+    <h2>THere are not any friends here</h2>
+  </div>
 </div>
 
-<div *ngIf='!friends.length'>
-  <h2>THere are not any friends here</h2>
+<div *ngIf='!loaded'>
+  <h2>Loading...</h2>
 </div>

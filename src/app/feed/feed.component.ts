@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   tweets = [];
   tweetText = "";
   errorText = "";
+  loaded=false;
 
 
 
@@ -22,6 +23,8 @@ export class FeedComponent implements OnInit {
       this.tweets = tweets;
     }, (err) => {
       this.errorText = `Oh No! We have experienced an internal error. (the underlying error was ${err}) `;
+    }, () => {
+      this.loaded=true;
     });
   }
 
