@@ -14,6 +14,7 @@ import {routing} from './app.routing';
 import { FriendComponent } from './friend/friend.component';
 import {InMemoryWebApiModule} from 'angular2-in-memory-web-api';
 import { MockDatabaseService }  from './mock.database.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MockDatabaseService }  from './mock.database.service';
     FeedComponent,
     MessagesComponent,
     FriendsComponent,
-    FriendComponent
+    FriendComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
