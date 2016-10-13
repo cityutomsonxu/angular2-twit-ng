@@ -2,11 +2,14 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { FeedService } from './feed.service';
+import { HttpModule }    from '@angular/http';
+import { UserService } from './user.service';
 
 describe('Service: Feed', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FeedService]
+      providers: [FeedService, UserService],
+      imports: [HttpModule]
     });
   });
 
